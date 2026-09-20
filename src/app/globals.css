@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #08080a;
-  --foreground: #f4f4f6;
-  --muted: #8e8e98;
-  --faint: #3f3f46;
-  --accent: #d97706;
+  --background: #f8fafc;
+  --foreground: #090d16;
+  --muted: #475569;
+  --faint: #e2e8f0;
+  --accent: #2563eb;
+  --accent-dark: #1d4ed8;
 }
 
 @theme inline {
@@ -20,15 +21,15 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   scroll-behavior: smooth;
-  background-color: #08080a;
-  color: #f4f4f6;
+  background-color: #f8fafc;
+  color: #090d16;
 }
 
 body {
-  background-color: #08080a;
-  color: #f4f4f6;
+  background-color: #f8fafc;
+  color: #090d16;
   font-family: var(--font-sans);
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
@@ -37,17 +38,19 @@ body {
   position: relative;
 }
 
-/* Atmospheric depth lighting */
+/* Soft Cold Matte ambient illumination (cold silver-slate with soft cobalt whisper) */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at 50% 20%, rgba(30, 30, 36, 0.35) 0%, rgba(8, 8, 10, 0.85) 65%, #08080a 100%);
+  background: 
+    radial-gradient(ellipse at 50% 0%, rgba(224, 238, 255, 0.45) 0%, rgba(248, 250, 252, 0.7) 50%, #f8fafc 100%),
+    radial-gradient(circle at 10% 30%, rgba(235, 243, 255, 0.3) 0%, transparent 40%);
   z-index: 1;
 }
 
-/* Subtle cinematic film texture (pure inline SVG data, hardware accelerated, zero external requests) */
+/* Cold Matte fine paper / film texture (hardware accelerated SVG data) */
 .film-grain {
   position: fixed;
   top: 0;
@@ -56,15 +59,16 @@ body::before {
   height: 100vh;
   pointer-events: none;
   z-index: 2;
-  opacity: 0.032;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  filter: contrast(110%);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* Atmospheric entrance animation */
 @keyframes sceneFadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -72,21 +76,23 @@ body::before {
   }
 }
 
-@keyframes subtlePulse {
+@keyframes coldPulse {
   0%, 100% {
-    opacity: 0.45;
+    opacity: 0.4;
+    transform: scale(0.96);
   }
   50% {
-    opacity: 0.95;
+    opacity: 1;
+    transform: scale(1.04);
   }
 }
 
 .scene-enter {
-  animation: sceneFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: sceneFadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.subtle-pulse {
-  animation: subtlePulse 3.5s ease-in-out infinite;
+.cold-pulse {
+  animation: coldPulse 3s ease-in-out infinite;
 }
 
 /* Accessibility: Respect user's motion preferences */
@@ -95,7 +101,7 @@ body::before {
     scroll-behavior: auto;
   }
   .scene-enter,
-  .subtle-pulse {
+  .cold-pulse {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

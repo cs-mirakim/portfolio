@@ -16,8 +16,8 @@ const geistSans = Geist({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#08080a",
-  colorScheme: "dark",
+  themeColor: "#f8fafc",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };
@@ -46,12 +46,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${geistSans.variable} dark antialiased`}
+      className={`${newsreader.variable} ${geistSans.variable} light antialiased`}
     >
-      <body className="min-h-screen bg-[#08080a] text-[#f4f4f6] selection:bg-amber-900/40 selection:text-amber-100 relative">
+      <body className="min-h-screen bg-[#f8fafc] text-[#090d16] selection:bg-blue-600/15 selection:text-blue-900 relative">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-6 focus:left-6 focus:z-50 focus:px-4 focus:py-2 focus:bg-zinc-100 focus:text-zinc-950 focus:text-xs focus:font-medium focus:tracking-wider focus:uppercase focus:shadow-lg focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-6 focus:left-6 focus:z-50 focus:px-4 focus:py-2 focus:bg-slate-900 focus:text-slate-50 focus:text-xs focus:font-medium focus:tracking-wider focus:uppercase focus:shadow-md focus:outline-none"
         >
           Skip to main content
         </a>
